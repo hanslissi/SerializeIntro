@@ -31,15 +31,12 @@ public class SchuelerBL extends AbstractListModel<Schueler>{
     }
     
     public void save(File f) throws Exception{
-        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
         for (Schueler schueler : klasse) {
-            bw.write(schueler.getName());
-            bw.write(";");
-            bw.write(schueler.getBirthday().toString());
-            bw.newLine();
+            oos.writeObject(schueler);
         }
-        bw.flush();
-        bw.close();
+        oos.flush();
+        oos.close();
     }
     
     public void load(File f) throws Exception{
@@ -53,14 +50,7 @@ public class SchuelerBL extends AbstractListModel<Schueler>{
         
     }
     
-    public void saveSerialize(File f) throws Exception{
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
-        for (Schueler schueler : klasse) {
-            oos.writeObject(schueler);
-        }
-        oos.flush();
-        oos.close();
-    }
+    
 
     @Override
     public int getSize() {

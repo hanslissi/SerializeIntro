@@ -20,7 +20,7 @@ public class SaveTester {
         bl.add(new Schueler("Johannes", LocalDate.of(2002, Month.JUNE, 8)));
         bl.add(new Schueler("Jonny", LocalDate.of(2002, Month.AUGUST, 19)));
         try{
-        bl.save(new File("./klasse.csv"));
+        bl.save(new File("./klasse.ser"));
         }
         catch(Exception ex){
             ex.printStackTrace();
