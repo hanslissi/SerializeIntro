@@ -16,7 +16,7 @@ public class LoadTester {
         SchuelerBL bl = new SchuelerBL();
 
         try {
-            bl.load(new File("./klasse.csv"));
+            bl.load(new File("./klasse.ser"));
             for (int i = 0; i < bl.getSize(); i++) {
                 System.out.println(bl.getElementAt(i).getName()+" "+bl.getElementAt(i).getBirthday().toString());
             }
