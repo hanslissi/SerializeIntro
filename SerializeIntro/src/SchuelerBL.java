@@ -1,6 +1,11 @@
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import javax.swing.AbstractListModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author johannesriedmueller
  */
-public class SchuelerBL {
+public class SchuelerBL extends AbstractListModel{
     ArrayList<Schueler> klasse = new ArrayList<>();
     
     public void add(Schueler s){
@@ -20,10 +25,31 @@ public class SchuelerBL {
     }
     
     public void save(File f) throws Exception{
-        
+        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+        for (Schueler schueler : klasse) {
+            bw.write(schueler.getName());
+            bw.write(";");
+            bw.write(schueler.getBirthday().toString());
+            bw.newLine();
+        }
+        bw.flush();
+        bw.close();
     }
     
     public void load(File f) throws Exception{
+        BufferedReader br = new BufferedReader(new FileReader(f));
+        String line = br.readLine();
         
+        
+    }
+
+    @Override
+    public int getSize() {
+        return klasse.size();
+    }
+
+    @Override
+    public Object getElementAt(int index) {
+        return klasse.get(index);
     }
 }
