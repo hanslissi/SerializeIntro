@@ -18,7 +18,7 @@ import javax.swing.AbstractListModel;
  *
  * @author johannesriedmueller
  */
-public class SchuelerBL extends AbstractListModel{
+public class SchuelerBL extends AbstractListModel<Schueler>{
     ArrayList<Schueler> klasse = new ArrayList<>();
     
     public void add(Schueler s){
@@ -55,7 +55,7 @@ public class SchuelerBL extends AbstractListModel{
     }
 
     @Override
-    public Object getElementAt(int index) {
+    public Schueler getElementAt(int index) {
         return klasse.get(index);
     }
 }
