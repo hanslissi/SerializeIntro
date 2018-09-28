@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
 
@@ -22,6 +23,7 @@ public class SchuelerBL extends AbstractListModel{
     
     public void add(Schueler s){
         klasse.add(s);
+        fireIntervalAdded(klasse, klasse.size()-1, klasse.size()-1);
     }
     
     public void save(File f) throws Exception{
@@ -38,8 +40,12 @@ public class SchuelerBL extends AbstractListModel{
     
     public void load(File f) throws Exception{
         BufferedReader br = new BufferedReader(new FileReader(f));
-        String line = br.readLine();
-        
+        String line;
+        while((line=br.readLine())!=null){
+            String data[] = line.split(";");
+            add(new Schueler(data[0],LocalDate.parse(data[1])));
+        }
+        fireIntervalAdded(klasse, 0, klasse.size()-1);
         
     }
 
