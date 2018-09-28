@@ -1,9 +1,13 @@
 
+import com.sun.corba.se.impl.io.IIOPOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
@@ -47,6 +51,15 @@ public class SchuelerBL extends AbstractListModel<Schueler>{
         }
         fireIntervalAdded(klasse, 0, klasse.size()-1);
         
+    }
+    
+    public void saveSerialize(File f) throws Exception{
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+        for (Schueler schueler : klasse) {
+            oos.writeObject(schueler);
+        }
+        oos.flush();
+        oos.close();
     }
 
     @Override
